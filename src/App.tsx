@@ -1,34 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { DataProvider, Renderer, VisibilityProvider } from '@json-render/react';
+import { catalog } from './lib/catalog'
+import { componentRegistry } from './components/ui';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const tree = catalog.treeSchema.parse({
+    "root": "card",
+    "elements": {
+      "card": {
+        "key": "card",
+        "type": "Card",
+        "props": {
+          "title": "Card Title",
+          "description": "This is a card component"
+        },
+        "children": [
+          "content"
+        ]
+      },
+      "content": {
+        "key": "content",
+        "type": "Text",
+        "props": {
+          "content": "Add your content here"
+        }
+      }
+    }
+  })
+
+  console.log(JSON.stringify(tree!, null, 2))
+
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+<div>
+    <DataProvider>
+      <VisibilityProvider>
+        <Renderer tree={tree} registry={componentRegistry} />
+
+    </VisibilityProvider>
+    </DataProvider>
+</div>
   )
 }
 
