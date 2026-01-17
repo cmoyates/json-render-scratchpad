@@ -1,5 +1,5 @@
-import { createCatalog } from '@json-render/core';
-import { z } from 'zod';
+import { createCatalog } from "@json-render/core";
+import { z } from "zod";
 
 export const catalog = createCatalog({
   components: {

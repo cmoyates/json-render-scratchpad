@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { type ComponentRenderProps } from "@json-render/react";
+import type { ComponentRenderProps } from "@json-render/react";
+import type React from "react";
 
 export function Button({ element, onAction, loading }: ComponentRenderProps) {
   const { label, variant, action, disabled } = element.props as {
@@ -28,8 +28,8 @@ export function Button({ element, onAction, loading }: ComponentRenderProps) {
 
   return (
     <button
-      onClick={() => !disabled && action && onAction?.(action)}
       disabled={!!disabled || loading}
+      onClick={() => !disabled && action && onAction?.(action)}
       style={{
         padding: "8px 16px",
         borderRadius: "var(--radius)",
