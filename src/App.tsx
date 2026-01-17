@@ -1,5 +1,10 @@
 import "./App.css";
-import { DataProvider, Renderer, VisibilityProvider } from "@json-render/react";
+import {
+  ActionProvider,
+  DataProvider,
+  Renderer,
+  VisibilityProvider,
+} from "@json-render/react";
 import { componentRegistry } from "./components/ui";
 import { catalog } from "./lib/catalog";
 
@@ -30,7 +35,9 @@ function App() {
     <div>
       <DataProvider>
         <VisibilityProvider>
-          <Renderer registry={componentRegistry} tree={tree} />
+          <ActionProvider>
+            <Renderer registry={componentRegistry} tree={tree} />
+          </ActionProvider>
         </VisibilityProvider>
       </DataProvider>
     </div>
